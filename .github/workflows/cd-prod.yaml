@@ -10,7 +10,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER_NAME }}
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
-  IMAGE: monitoramento-realtime
+  IMAGE: monitoramento-novafrota
 
 jobs:
   lint:
@@ -71,7 +71,7 @@ jobs:
         run: |-
           cd ./k8s/prod
           ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-          ./kustomize build . | kubectl apply -n monitoramento-realtime -f -
-          kubectl get services -n monitoramento-realtime -o wide
+          ./kustomize build . | kubectl apply -n monitoramento-novafrota -f -
+          kubectl get services -n monitoramento-novafrota -o wide
 
 # trigger

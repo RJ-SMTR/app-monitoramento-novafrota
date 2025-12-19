@@ -31,7 +31,7 @@ export function MovingMarkerProvider({ children }) {
     }
 
     useEffect(() => {
-        if (realtimeBrt && realtimeSPPO) {
+        if (realtimeSPPO) {
             const max_latitude = -22.59
             const min_latitude = -23.13
             const max_longitude = -43.0
@@ -40,25 +40,6 @@ export function MovingMarkerProvider({ children }) {
 
             const wktExample = wktRio
             const geoJsonFromWkt = wktToGeoJson(wktExample)
-
-            const uniqueTrackedItems = realtimeBrt.reduce((uniqueItems, item) => {
-                if (!uniqueItems.some(existingItem => existingItem.codigo === item.codigo)) {
-                    uniqueItems.push(item);
-                }
-                return uniqueItems;
-            }, []);
-
-
-
-            const filteredBRT = uniqueTrackedItems.filter(item => {
-                const point = turf.point([item.longitude, item.latitude]);
-
-                return turf.booleanPointInPolygon(point, geoJsonFromWkt) && min_latitude <= item.latitude && item.latitude <= max_latitude && min_longitude <= item.longitude && item.longitude <= max_longitude && item.codigo.startsWith('90') || item.codigo.startsWith('E90') || item.codigo.startsWith('70') ;
-
-            });
-            const sortedBrt = filteredBRT.sort((a, b) => a.codigo - b.codigo)
-            setTracked(sortedBrt);
-
 
             const uniqueItems = realtimeSPPO.reduce((uniqueItems, item) => {
                 const existingItemIndex = uniqueItems.findIndex(existingItem => existingItem.ordem === item.ordem)

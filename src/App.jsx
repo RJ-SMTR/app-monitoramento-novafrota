@@ -6,7 +6,6 @@ import { MovingMarkerContext } from "./hooks/getMovingMarkers"
 import BusMarker from "./components/MovingMarkersBRT"
 import BusMarkerSPPO from "./components/MovingMarkerSPPO"
 import Tables from "./components/table"
-import TablesBRT from "./components/tableBRT"
 import Logos from "./components/logos"
 
 function App() {
@@ -32,7 +31,6 @@ function App() {
     <Logos/>
 <div className="tables hidden sm:block">
       <Tables/>
-      <TablesBRT/>
 </div>
       <button
         type="button"
@@ -54,7 +52,6 @@ function App() {
             id="dropdown-menu">
                 <Tables />
             
-                <TablesBRT/>
             </div>
         )}
       </div>

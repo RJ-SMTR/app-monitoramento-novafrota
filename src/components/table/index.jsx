@@ -34,33 +34,14 @@ function Tables() {
           <table className=" border-separate border-spacing-1 ">
             <thead>
                 <th>
-                    BRT
-                </th>
-                <th>
                   SPPO
                 </th>
             </thead>
             <tbody>
                 <tr>
-                      <td> {tracked.length}</td>
                       
                       <td>
                           {trackedSPPO.length}
-                      </td>
-                </tr>
-                <tr>
-                      <td>  <input
-                          type="checkbox"
-                          checked={showBRT}
-                          onChange={() => setShowBRT(!showBRT)}
-                      /></td>
-                      
-                      <td>
-                          <input
-                              type="checkbox"
-                              checked={showSPPO}
-                              onChange={() => setShowSPPO(!showSPPO)}
-                          />
                       </td>
                 </tr>
 

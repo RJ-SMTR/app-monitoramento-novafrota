@@ -22,6 +22,16 @@ export function GPSProvider({ children }) {
     }
     let allSPPO = []
     async function getSPPO(){
+        const start = 33082;
+        const end = 33181;
+
+        const seq = [];
+
+        for (let i = start; i <= end; i++) {
+            seq.push(`D${i}`);
+        }
+
+
         const currentDate = new Date();
 
         const fiveMinutesAgo = subMinutes(currentDate, 5);
@@ -31,15 +41,15 @@ export function GPSProvider({ children }) {
 
         await axios.get(`https://dados.mobilidade.rio/gps/sppo?&dataInicial=${formattedDataInicial}&dataFinal=${formattedDataFinal}`)
             .then((response) => {
-                response.data.forEach((item) => {
-                    allSPPO.push(item)
+                allSPPO = response.data.filter(item => 
+                    seq.includes(item.ordem))
+                setRealtimeSPPO([...allSPPO]);
+                allSPPO = [];
                 })
-                setRealtimeSPPO([...allSPPO])
-                allSPPO = []
-            })
-    }
+
+            }
     function getGPSAndSPPO() {
-        getGPS()
+        // getGPS()
         getSPPO()
     }
 
